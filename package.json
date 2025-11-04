@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "predeploy": "python3 -m pip install -r packages/functions/core/requirements.txt -t packages/functions/core --upgrade",
+    "build": "npm run build --workspaces",
     "deploy": "sst deploy",
-    "start": "sst dev",
+    "deploy:dev": "sst deploy --stage dev",
+    "deploy:prod": "sst deploy --stage production",
+    "start": "sst dev --stage dev",
+    "start:prod": "sst dev --stage production",
     "sst": "sst"
   },
   "workspaces": [

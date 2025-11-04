@@ -1,0 +1,16 @@
+{
+  "name": "@traffiq/core-functions",
+  "version": "1.0.0",
+  "description": "Core TypeScript functions for Traffiq",
+  "main": "src/handler.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.157"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

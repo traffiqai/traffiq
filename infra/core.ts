@@ -1,8 +1,7 @@
-export const coreFunction = new sst.aws.Function('PythonFunctio', {
-  handler: 'handler.main',
-  runtime: 'python3.11',
+export const coreFunction = new sst.aws.Function('TypeScriptFunction', {
+  handler: 'packages/functions/core/src/handler.main',
+  runtime: 'nodejs20.x',
   url: true,
-  bundle: 'packages/functions/core',
   timeout: '30 seconds',
-  memory: '512 MB',
+  memory: '128 MB',
 });

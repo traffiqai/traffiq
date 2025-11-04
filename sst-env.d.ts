@@ -5,7 +5,7 @@
 
 declare module "sst" {
   export interface Resource {
-    "PythonFunctio": {
+    "TypeScriptFunction": {
       "name": string
       "type": "sst.aws.Function"
       "url": string
