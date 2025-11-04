@@ -1,0 +1,26 @@
+{
+  "name": "traffiq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "sst deploy",
+    "start": "sst dev",
+    "sst": "sst"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.157",
+    "@types/node": "^24.10.0",
+    "sst": "^3.9.28",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "sst": "3.17.21"
+  }
+}

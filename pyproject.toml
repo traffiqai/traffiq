@@ -1,0 +1,17 @@
+[project]
+name = "python"
+version = "0.1.0"
+dependencies = [
+    "requests",
+]
+
+requires-python = "==3.11.*"
+
+[tool.uv.workspace]
+members = [
+    "packages/functions/core"
+]
+
+
+[tool.uv.sources]
+sst = { git = "https://github.com/sst/sst.git", subdirectory = "sdk/python", branch = "dev" }
