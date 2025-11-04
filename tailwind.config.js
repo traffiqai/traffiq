@@ -1,0 +1,21 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './packages/web/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './packages/web/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './packages/web/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+      },
+      fontFamily: {
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
+      },
+    },
+  },
+  plugins: [],
+};
