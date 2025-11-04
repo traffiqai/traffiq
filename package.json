@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "predeploy": "python3 -m pip install -r packages/functions/core/requirements.txt -t packages/functions/core --upgrade",
     "deploy": "sst deploy",
     "start": "sst dev",
     "sst": "sst"
