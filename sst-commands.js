@@ -6,6 +6,12 @@ async function runDatabaseOperations(stage) {
   console.log(`Running pre-deploy database operations for stage: ${stage}`);
 
   const databasePath = path.join(process.cwd(), 'packages/database');
+  const buildEnv = {
+    ...process.env,
+    NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=2048']
+      .filter(Boolean)
+      .join(' '),
+  };
 
   try {
     // Always generate Prisma client first (required for build)
@@ -20,6 +26,7 @@ async function runDatabaseOperations(stage) {
     execSync('npm run build', {
       cwd: databasePath,
       stdio: 'inherit',
+      env: buildEnv,
     });
 
     if (stage === 'production') {
