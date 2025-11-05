@@ -35,12 +35,11 @@
   "license": "ISC",
   "description": "",
   "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
+    "node": "20.x"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.157",
-    "@types/node": "^24.10.0",
+    "@types/node": "^20.17.0",
     "sst": "^3.9.28",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
