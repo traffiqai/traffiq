@@ -8,6 +8,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
+    "@traffiq/database": "*",
     "@types/aws-lambda": "^8.10.157"
   },
   "devDependencies": {

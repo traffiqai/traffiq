@@ -5,9 +5,17 @@
 
 declare module "sst" {
   export interface Resource {
+    "BetterAuthSecret": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "Dashboard": {
       "type": "sst.aws.Nextjs"
       "url": string
+    }
+    "DatabaseUrl": {
+      "type": "sst.sst.Secret"
+      "value": string
     }
     "Landing": {
       "type": "sst.aws.Nextjs"

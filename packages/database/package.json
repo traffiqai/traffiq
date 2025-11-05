@@ -1,0 +1,25 @@
+{
+  "name": "@traffiq/database",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "npm run db:generate",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev",
+    "clean": "rm -rf dist src/generated"
+  },
+  "dependencies": {
+    "better-auth": "^0.7.0",
+    "prisma": "^5.7.0",
+    "@prisma/client": "^5.7.0",
+    "@prisma/extension-accelerate": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
