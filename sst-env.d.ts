@@ -5,14 +5,21 @@
 
 declare module "sst" {
   export interface Resource {
+    "Dashboard": {
+      "type": "sst.aws.Nextjs"
+      "url": string
+    }
+    "Landing": {
+      "type": "sst.aws.Nextjs"
+      "url": string
+    }
+    "Router": {
+      "type": "sst.aws.Router"
+      "url": string
+    }
     "TypeScriptFunction": {
       "name": string
       "type": "sst.aws.Function"
-      "url": string
-    }
-    "Web": {
-      "type": "sst.aws.Nextjs"
-      "url": string
     }
   }
 }

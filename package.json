@@ -7,7 +7,7 @@
     "deploy": "sst deploy",
     "deploy:dev": "sst deploy --stage dev",
     "deploy:prod": "sst deploy --stage production",
-    "start": "sst dev --stage dev",
+    "start": "rm -rf .sst && cd packages/dashboard && rm -rf .next && cd ../landing && rm -rf .next && cd ../.. && sst dev --stage dev",
     "start:prod": "sst dev --stage production",
     "sst": "sst"
   },
