@@ -5,16 +5,9 @@ const path = require('path');
 async function runDatabaseOperations(stage) {
   console.log(`Running pre-deploy database operations for stage: ${stage}`);
 
-  const rootPath = process.cwd();
-  const databasePath = path.join(rootPath, 'packages/database');
+  const databasePath = path.join(process.cwd(), 'packages/database');
 
   try {
-    // Ensure package-lock.json is in sync with package.json
-    execSync('npm install', {
-      cwd: rootPath,
-      stdio: 'inherit',
-    });
-
     // Always generate Prisma client first (required for build)
     console.log('Generating Prisma client...');
     execSync('npx prisma generate', {
