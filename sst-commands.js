@@ -4,33 +4,40 @@ const path = require('path');
 
 async function runDatabaseOperations(stage) {
   console.log(`Running pre-deploy database operations for stage: ${stage}`);
-  
+
   const databasePath = path.join(process.cwd(), 'packages/database');
-  
+
   try {
+    // Always generate Prisma client first (required for build)
+    console.log('Generating Prisma client...');
+    execSync('npx prisma generate', {
+      cwd: databasePath,
+      stdio: 'inherit',
+    });
+
+    // Build the database package
+    console.log('Building database package...');
+    execSync('npm run build', {
+      cwd: databasePath,
+      stdio: 'inherit',
+    });
+
     if (stage === 'production') {
       // Production: Use migrate deploy (safe for production)
       console.log('Running production database migrations...');
-      execSync('npx prisma migrate deploy', { 
-        cwd: databasePath, 
-        stdio: 'inherit' 
+      execSync('npx prisma migrate deploy', {
+        cwd: databasePath,
+        stdio: 'inherit',
       });
     } else {
       // Development/Staging: Use db push (allows schema changes)
       console.log('Pushing database schema changes...');
-      execSync('npx prisma db push', { 
-        cwd: databasePath, 
-        stdio: 'inherit' 
+      execSync('npx prisma db push', {
+        cwd: databasePath,
+        stdio: 'inherit',
       });
     }
 
-    // Generate Prisma client
-    console.log('Generating Prisma client...');
-    execSync('npx prisma generate', { 
-      cwd: databasePath, 
-      stdio: 'inherit' 
-    });
-    
     console.log('Database operations completed successfully');
   } catch (error) {
     console.error('Database operation failed:', error);

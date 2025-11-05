@@ -11,6 +11,7 @@ exports.auth = (0, better_auth_1.betterAuth)({
     emailAndPassword: {
         enabled: true,
     },
-    trustedOrigins: [process.env.BETTER_AUTH_URL || 'http://localhost:3000'],
+    baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:3000',
+    secret: process.env.BETTER_AUTH_SECRET,
 });
 //# sourceMappingURL=auth.js.map

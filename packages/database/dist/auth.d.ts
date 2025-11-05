@@ -1252,7 +1252,8 @@ export declare const auth: {
         emailAndPassword: {
             enabled: true;
         };
-        trustedOrigins: string[];
+        baseURL: string;
+        secret: string;
     };
     $Infer: {
         Session: {

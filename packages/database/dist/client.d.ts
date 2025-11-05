@@ -1,7 +1,7 @@
 declare global {
     var __prisma: ReturnType<typeof createPrismaClient> | undefined;
 }
-declare function createPrismaClient(): import("./generated/runtime/library").DynamicClientExtensionThis<import("./generated").Prisma.TypeMap<import("./generated/runtime/library").InternalArgs & {
+declare function createPrismaClient(): import("@prisma/client/runtime/library").DynamicClientExtensionThis<import(".prisma/client").Prisma.TypeMap<import("@prisma/client/runtime/library").InternalArgs & {
     result: {};
     model: {
         $allModels: {
@@ -66,7 +66,7 @@ declare function createPrismaClient(): import("./generated/runtime/library").Dyn
             }>;
         };
     };
-}, import("./generated").Prisma.PrismaClientOptions>, import("./generated").Prisma.TypeMapCb, {
+}, import(".prisma/client").Prisma.PrismaClientOptions>, import(".prisma/client").Prisma.TypeMapCb, {
     result: {};
     model: {
         $allModels: {
@@ -132,7 +132,7 @@ declare function createPrismaClient(): import("./generated/runtime/library").Dyn
         };
     };
 }, {}>;
-declare const prisma: import("./generated/runtime/library").DynamicClientExtensionThis<import("./generated").Prisma.TypeMap<import("./generated/runtime/library").InternalArgs & {
+declare const prisma: import("@prisma/client/runtime/library").DynamicClientExtensionThis<import(".prisma/client").Prisma.TypeMap<import("@prisma/client/runtime/library").InternalArgs & {
     result: {};
     model: {
         $allModels: {
@@ -197,7 +197,7 @@ declare const prisma: import("./generated/runtime/library").DynamicClientExtensi
             }>;
         };
     };
-}, import("./generated").Prisma.PrismaClientOptions>, import("./generated").Prisma.TypeMapCb, {
+}, import(".prisma/client").Prisma.PrismaClientOptions>, import(".prisma/client").Prisma.TypeMapCb, {
     result: {};
     model: {
         $allModels: {

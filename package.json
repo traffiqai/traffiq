@@ -34,6 +34,10 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "devDependencies": {
     "@types/aws-lambda": "8.10.157",
     "@types/node": "^24.10.0",
