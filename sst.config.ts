@@ -15,9 +15,6 @@ export default $config({
     };
   },
   async run() {
-    // Import core infrastructure to get secrets
-    const { databaseUrl, betterAuthSecret } = await import('./infra/core');
-
     // Run database operations before deployment
     console.log(
       `Running pre-deploy database operations for stage: ${$app.stage}`
@@ -26,27 +23,18 @@ export default $config({
     if ($app.stage === 'production') {
       // Production: Use migrate deploy (safe for production)
       console.log('Running production database migrations...');
-      await $util.command('cd packages/database && npx prisma migrate deploy', {
-        env: {
-          DATABASE_URL: databaseUrl.value,
-          BETTER_AUTH_SECRET: betterAuthSecret.value,
-        },
-      });
+      await $util.command('cd packages/database && npx prisma migrate deploy');
     } else {
       // Development/Staging: Use db push (allows schema changes)
       console.log('Pushing database schema changes...');
-      await $util.command('cd packages/database && npx prisma db push', {
-        env: {
-          DATABASE_URL: databaseUrl.value,
-          BETTER_AUTH_SECRET: betterAuthSecret.value,
-        },
-      });
+      await $util.command('cd packages/database && npx prisma db push');
     }
 
     // Generate Prisma client
     await $util.command('cd packages/database && npx prisma generate');
 
-    // Import web infrastructure
+    // Import infrastructure
+    await import('./infra/core');
     await import('./infra/web');
   },
 });

@@ -39,24 +39,22 @@ First, you'll need a PostgreSQL database. You can use:
 - AWS RDS
 - Local PostgreSQL
 
-### 2. Configure Secrets
+### 2. Configure Environment Variables
 
-**IMPORTANT: You must set up your database and secrets before running Prisma commands!**
+**IMPORTANT: You must set up your database and environment variables before running Prisma commands!**
 
 ```bash
 # Generate a Better Auth secret
 npx @better-auth/cli@latest secret
 
-# Set secrets for development
-npx sst secret set DatabaseUrl "postgresql://username:password@host:port/database" --stage dev
-npx sst secret set BetterAuthSecret "your-generated-secret" --stage dev
+# Create .env file for local development
+cp .env.example .env
 
-# Set secrets for production
-npx sst secret set DatabaseUrl "postgresql://username:password@host:port/database" --stage production
-npx sst secret set BetterAuthSecret "your-production-secret" --stage production
+# Edit .env file with your values:
+# DATABASE_URL="postgresql://username:password@host:port/database"
+# BETTER_AUTH_SECRET="your-generated-secret"
 
-# Verify secrets are set
-npx sst secret list --stage dev
+# For production, set environment variables in your deployment platform
 ```
 
 ### 3. Initialize Database
@@ -69,7 +67,7 @@ npm run db:push
 npm run db:studio
 ```
 
-**Note:** The database commands automatically fetch secrets from SST, so you don't need `sst dev` running for basic database operations.
+**Note:** The database commands automatically load environment variables from your `.env` file, so you don't need `sst dev` running for basic database operations.
 
 ### 4. Start Development
 
@@ -276,17 +274,21 @@ This happens when running Prisma commands directly without SST context. **Soluti
    DATABASE_URL="postgresql://user:pass@localhost:5432/db"
    ```
 
-### Secrets Not Available
+### Environment Variables Not Loading
 
-Make sure you've set your secrets:
+Make sure your environment variables are properly formatted:
 
 ```bash
-npx sst secret list --stage dev
-npx sst secret set DatabaseUrl "your-url" --stage dev
-npx sst secret set BetterAuthSecret "your-secret" --stage dev
-```
+# ✅ Correct format (no spaces around =)
+DATABASE_URL="postgresql://user:pass@host:port/db"
 
-If you see "No secrets found", you need to set them first before running any database commands.
+# ❌ Wrong format (spaces around =)
+DATABASE_URL = "postgresql://user:pass@host:port/db"
+
+# Check if .env file exists and is readable
+ls -la .env
+cat .env
+```
 
 ## 🎯 Ready to Go!
 

@@ -12,19 +12,20 @@ fi
 
 echo "Opening Prisma Studio for stage: $STAGE"
 
-# Get secrets from SST for the current stage
-DATABASE_URL=$(npx sst secret list --stage $STAGE | grep "DatabaseUrl=" | cut -d'=' -f2-)
-BETTER_AUTH_SECRET=$(npx sst secret list --stage $STAGE | grep "BetterAuthSecret=" | cut -d'=' -f2-)
-
-if [ -z "$DATABASE_URL" ]; then
-  echo "Error: DATABASE_URL not found for stage $STAGE"
-  echo "Make sure you have set the secrets:"
-  echo "npx sst secret set DatabaseUrl \"your-db-url\" --stage $STAGE"
-  exit 1
+# Load environment variables from .env file if it exists
+if [ -f .env ]; then
+  export $(cat .env | grep -v '^#' | xargs)
 fi
 
-export DATABASE_URL
-export BETTER_AUTH_SECRET
+# Check if DATABASE_URL is set
+if [ -z "$DATABASE_URL" ]; then
+  echo "Error: DATABASE_URL not found"
+  echo "Make sure you have:"
+  echo "1. Created a .env file with DATABASE_URL"
+  echo "2. Or set DATABASE_URL environment variable"
+  echo "3. Or use SST environment variables"
+  exit 1
+fi
 
 cd packages/database
 npx prisma studio
