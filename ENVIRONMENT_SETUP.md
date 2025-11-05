@@ -2,7 +2,7 @@
 
 ## 📋 **Overview**
 
-Traffiq uses environment variables for configuration instead of SST secrets. This approach is simpler and more flexible for different deployment scenarios.
+Traffiq uses environment variables for configuration instead of SST secrets. This approach is simpler and more flexible for different deployment scenarios. The project is configured with SST Console autodeploy for automatic deployments based on git branches.
 
 ## 🏗️ **Environment Variable Structure**
 
@@ -219,13 +219,43 @@ npx sst secret remove DatabaseUrl --stage dev
 npx sst secret remove BetterAuthSecret --stage dev
 ```
 
+## 🎛️ **SST Console Environment Configuration**
+
+For automatic deployments, configure environment variables in SST Console:
+
+### **Development Stage (`dev`)**
+
+- Set in SST Console for automatic `main` branch deployments
+- Uses development database and relaxed security settings
+
+### **Production Stage (`production`)**
+
+- Set in SST Console for automatic `prod` branch deployments
+- Uses production database and strict security settings
+
+### **Pull Request Stages (`pr-*`)**
+
+- Automatically inherit development-like settings
+- Use shared development resources for cost efficiency
+
+📖 **See [SST_CONSOLE_SETUP.md](./SST_CONSOLE_SETUP.md) for detailed SST Console configuration instructions.**
+
 ## ✅ **Verification Checklist**
+
+### **Local Development**
 
 - [ ] `.env` file created with correct values
 - [ ] `DATABASE_URL` connects to your database
 - [ ] `BETTER_AUTH_SECRET` is 32+ characters
 - [ ] `npm run db:push` works without errors
 - [ ] `npm run db:studio` opens successfully
-- [ ] Production environment variables configured
 
-Your environment is now ready for development and deployment! 🎉
+### **SST Console Setup**
+
+- [ ] Repository connected to SST Console
+- [ ] Development environment variables configured
+- [ ] Production environment variables configured
+- [ ] AWS profiles configured correctly
+- [ ] Autodeploy configuration tested
+
+Your environment is now ready for development and automatic deployment! 🎉

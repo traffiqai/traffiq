@@ -13,6 +13,15 @@ This guide covers deploying your Traffiq authentication system to production usi
 
 ## 🎯 **Deployment Workflow**
 
+### **Automatic Deployment (SST Console Autodeploy)**
+
+The project is configured with automatic deployments based on git branches:
+
+- **`main` branch** → `dev` stage (development environment)
+- **`prod` branch** → `production` stage (production environment)
+- **Pull Requests** → `pr-{number}` stages (temporary preview environments)
+- **Other branches** → No deployment
+
 ### **1. Local Development**
 
 ```bash
@@ -23,33 +32,40 @@ npm run start
 npm run db:studio
 ```
 
-### **2. Staging Deployment**
+### **2. Development Deployment (Automatic)**
 
 ```bash
-# Set staging secrets (one-time setup)
-npx sst secret set DatabaseUrl "staging-db-url" --stage staging
-npx sst secret set BetterAuthSecret "staging-secret" --stage staging
-
-# Deploy to staging
-sst deploy --stage staging
+# Push to main branch for automatic dev deployment
+git push origin main
 ```
 
-### **3. Production Deployment (SST Console)**
+SST Console automatically:
 
-#### **One-Time Setup:**
+- Runs `prisma db push` for schema changes
+- Deploys to `dev` stage
+- Uses development environment variables
+
+### **3. Production Deployment (Automatic)**
 
 ```bash
-# Set production secrets
-npx sst secret set DatabaseUrl "production-db-url" --stage production
-npx sst secret set BetterAuthSecret "production-secret" --stage production
+# Push to prod branch for automatic production deployment
+git push origin prod
 ```
 
-#### **Automatic Deployment:**
+SST Console automatically:
 
-1. **Push to main branch** → SST Console automatically:
-   - Runs pre-deploy database migrations
-   - Deploys application
-   - Ensures production security
+- Runs `prisma migrate deploy` for safe migrations
+- Deploys to `production` stage
+- Uses production environment variables
+- Ensures production security settings
+
+### **4. Pull Request Previews (Automatic)**
+
+When you create a pull request:
+
+- SST Console creates a temporary `pr-{number}` stage
+- Uses development-like settings for testing
+- Automatically removes the stage when PR is closed/merged
 
 ## 📊 **Available Commands**
 

@@ -14,24 +14,35 @@ export default $config({
       home: 'aws',
     };
   },
+  console: {
+    autodeploy: {
+      target(event) {
+        // main branch → dev stage
+        if (event.type === 'branch' && event.branch === 'main') {
+          return { stage: 'dev' };
+        }
+
+        // prod branch → production stage
+        if (event.type === 'branch' && event.branch === 'prod') {
+          return { stage: 'production' };
+        }
+
+        // Pull Requests → pr-{number} stages (temporary)
+        if (event.type === 'pull_request') {
+          return {
+            stage: `pr-${event.number}`,
+          };
+        }
+
+        // Other branches → Skip deployment
+        return;
+      },
+    },
+  },
   async run() {
     // Run database operations before deployment
-    console.log(
-      `Running pre-deploy database operations for stage: ${$app.stage}`
-    );
-
-    if ($app.stage === 'production') {
-      // Production: Use migrate deploy (safe for production)
-      console.log('Running production database migrations...');
-      await $util.command('cd packages/database && npx prisma migrate deploy');
-    } else {
-      // Development/Staging: Use db push (allows schema changes)
-      console.log('Pushing database schema changes...');
-      await $util.command('cd packages/database && npx prisma db push');
-    }
-
-    // Generate Prisma client
-    await $util.command('cd packages/database && npx prisma generate');
+    const { runDatabaseOperations } = await import('./sst-commands.js');
+    await runDatabaseOperations($app.stage);
 
     // Import infrastructure
     await import('./infra/core');
