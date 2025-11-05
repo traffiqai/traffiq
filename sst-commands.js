@@ -8,20 +8,13 @@ async function runDatabaseOperations(stage) {
   const databasePath = path.join(process.cwd(), 'packages/database');
   const buildEnv = {
     ...process.env,
-    NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=2048']
+    NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=4096']
       .filter(Boolean)
       .join(' '),
   };
 
   try {
-    // Always generate Prisma client first (required for build)
-    console.log('Generating Prisma client...');
-    execSync('npx prisma generate', {
-      cwd: databasePath,
-      stdio: 'inherit',
-    });
-
-    // Build the database package
+    // Build the database package (runs prisma generate in prebuild)
     console.log('Building database package...');
     execSync('npm run build', {
       cwd: databasePath,
