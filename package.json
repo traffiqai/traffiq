@@ -40,7 +40,6 @@
   "devDependencies": {
     "@types/aws-lambda": "8.10.157",
     "@types/node": "^20.17.0",
-    "sst": "^3.9.28",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
@@ -49,5 +48,8 @@
     "postcss": "^8.4.38",
     "sst": "3.17.21",
     "tailwindcss": "^3.4.3"
+  },
+  "optionalDependencies": {
+    "sst-linux-x64": "3.17.21"
   }
 }
