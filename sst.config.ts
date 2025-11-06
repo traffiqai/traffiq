@@ -50,6 +50,7 @@ export default $config({
 
     // Import infrastructure
     await import('./infra/core');
+    await import('./infra/dns');
     await import('./infra/web');
   },
 });
