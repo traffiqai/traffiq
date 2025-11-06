@@ -23,7 +23,11 @@ export default $config({
         }
 
         // prod branch → production stage
-        if (event.type === 'branch' && event.branch === 'prod') {
+        if (
+          event.type === 'branch' &&
+          (event.branch === 'prod' || event.branch === 'main')
+        ) {
+          // temporary until we have a prod branch
           return { stage: 'production' };
         }
 
