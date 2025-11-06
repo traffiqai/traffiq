@@ -18,10 +18,10 @@
     "better-auth": "^0.7.0",
     "prisma": "^5.7.0",
     "@prisma/client": "^5.7.0",
-    "@prisma/extension-accelerate": "^1.0.0"
+    "@prisma/extension-accelerate": "^1.0.0",
+    "@types/node": "^20.17.0"
   },
   "devDependencies": {
-    "@types/node": "^20.17.0",
     "typescript": "^5.9.3"
   }
 }
